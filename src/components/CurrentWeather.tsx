@@ -1,5 +1,6 @@
 import { Cloudy, Droplet, Droplets, Eye, GlassesIcon, Wind } from 'lucide-react';
 import { getCurrentWeather } from './api';
+import WeatherIcone from './WeatherIcone';
 
 const CurrentWeather = () => {
   const data = getCurrentWeather();
@@ -76,7 +77,7 @@ const CurrentWeather = () => {
     lg:flex-row lg:gap-6'>
         <div className='temperature border rounded-2xl py-4 px-6 flex flex-col gap-2 w-[200px]  '>
             <div className='weather-icon items-center flex justify-center'>
-                <img src={`/dist/weather_icons/set01/big/${icon_num}.png`} alt={summary} />
+              <WeatherIcone iconNumber={icon_num} alt={summary}/>
             </div>
             <div className='value '>
                 <div className='real text-2xl'>{temperature} C</div>
