@@ -1,4 +1,4 @@
-import current-weather from './current-weather.json'
+import currentWeather from './current_weather.json'
 
 function getCurrentWeather() {
   return currentWeather.current;
