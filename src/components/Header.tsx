@@ -1,4 +1,3 @@
-import React from 'react'
 import Place from './Place'
 import SearchC from './SearchC'
 import { Setting } from './Setting'

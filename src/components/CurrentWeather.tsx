@@ -11,7 +11,6 @@ const CurrentWeather = () => {
         visibility,
         uv_index,
         summary,
-        pressure,
         precipitation,
         wind,
         humidity,
