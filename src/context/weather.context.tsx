@@ -23,27 +23,37 @@ function WeatherProvider ({children}: { children: React.ReactNode }){
     async function _getWeatherData() {
       setLoading(true);
 
-      const cw = await getWeatherData(
+      const cw: { current: any; units: keyof typeof UNITS } | undefined = await getWeatherData(
         'current',
         place.place_id,
         measurementSystem
       );
-      setCurrentWeather(cw.current);
-      setUnits(UNITS[cw.units]);
+      if (cw && cw.units && UNITS[cw.units]) {
+        setCurrentWeather(cw.current);
+        setUnits(UNITS[cw.units]);
+      }
 
       const hf = await getWeatherData(
         'hourly',
         place.place_id,
         measurementSystem
       );
-      setHourlyForecast(hf.hourly.data);
+      if (hf && hf.hourly && hf.hourly.data) {
+        setHourlyForecast(hf.hourly.data);
+      } else {
+        setHourlyForecast([]);
+      }
 
       const df = await getWeatherData(
         'daily',
         place.place_id,
         measurementSystem
       );
-      setDailyForecast(df.daily.data);
+      if (df && df.daily && df.daily.data) {
+        setDailyForecast(df.daily.data);
+      } else {
+        setDailyForecast([]);
+      }
 
       setLoading(false);
     }
