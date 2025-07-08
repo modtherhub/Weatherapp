@@ -7,6 +7,7 @@ const HourlyForcastWidget = ({data}:any) => {
     
     const {temperature, date, icon, summary, wind, precipitation } = data;
 
+
     // Format the time to a readable format
     const now_date = {
         day: new Intl.DateTimeFormat(navigator.language, { 
@@ -41,7 +42,7 @@ const HourlyForcastWidget = ({data}:any) => {
         ;
 
     return (
-        <div className='container widget flex flex-col items-center justify-between bg-white border rounded-lg shadow-md hover:shadow-lg transition-shadow duration-300 ease-in-out'>
+        <div className='container widget flex flex-col items-center justify-between bg-white rounded-lg shadow-md hover:shadow-lg transition-shadow duration-300 ease-in-out'>
             <div className='widget container border py-4 px-6 m-4 w-[200px] space-y-3'>
             <div className='day text-center font-bold'>{weather_date.day}</div>
             <div className='time text-center'>{weather_date.time}</div>

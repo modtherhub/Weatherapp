@@ -1,6 +1,7 @@
 import CurrentWeather from './CurrentWeather'
+import DForecastRow from './DForecastRow'
 import Forcast from './Forcast'
-import ForecastRow from './ForecastRow'
+import HForecastRow from './HForecastRow'
 import { getHourlyForecast } from './api'
 import { getDailyForecast } from './api'
 
@@ -8,8 +9,9 @@ const Main = () => {
   return (
     <div>
       <CurrentWeather/>
-      <ForecastRow data={getHourlyForecast()}/>
-      <Forcast type='daily' title='21 DAYS FORCAST' data={getDailyForecast()}/>
+      <HForecastRow data={getHourlyForecast()}/>
+      <DForecastRow data={getDailyForecast()}/>
+      
       
     </div>
   )

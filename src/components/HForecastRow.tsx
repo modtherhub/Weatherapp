@@ -1,8 +1,7 @@
-import React from 'react'
 import HourlyForcastWidget from './HourlyForcastWidget';
 
 
-const ForecastRow = ({ data }: { data: any[] }) => {
+const HForecastRow = ({ data }: { data: any[] }) => {
   return (
     <div className="flex flex-row overflow-x-auto p-4 gap-4">
       {data.map((item, index) => (
@@ -12,4 +11,4 @@ const ForecastRow = ({ data }: { data: any[] }) => {
   )
 }
 
-export default ForecastRow
+export default HForecastRow
