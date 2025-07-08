@@ -1,9 +1,9 @@
 import { Cloudy, Droplet, Droplets, Eye, GlassesIcon, Wind } from 'lucide-react';
-import { getCurrentWeather } from './api';
+
 import WeatherIcone from './WeatherIcone';
 
-const CurrentWeather = () => {
-  const data = getCurrentWeather();
+const CurrentWeather = ({data}:any) => {
+  
     const { 
         temperature, 
         icon_num, 

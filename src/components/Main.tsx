@@ -2,15 +2,24 @@ import CurrentWeather from './CurrentWeather'
 import DForecastRow from './DForecastRow'
 import Forcast from './Forcast'
 import HForecastRow from './HForecastRow'
-import { getHourlyForecast } from './api'
-import { getDailyForecast } from './api'
+import { useContext } from 'react'
+import WeatherContext from '../context/weather.context'
+import Loader from './Loader'
 
 const Main = () => {
+  const {loading, currentWeather, hourlyForecast, dailyForecast} = useContext(WeatherContext)
+  
   return (
     <div>
-      <CurrentWeather/>
-      <HForecastRow data={getHourlyForecast()}/>
-      <DForecastRow data={getDailyForecast()}/>
+      {loading ? 
+      (<Loader/>) : (
+        <>
+        <CurrentWeather data={currentWeather}/>
+        <HForecastRow data={hourlyForecast}/>
+        <DForecastRow data={dailyForecast}/>
+        </>
+      )
+      }
       
       
     </div>

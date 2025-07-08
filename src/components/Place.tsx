@@ -1,11 +1,14 @@
-import React from 'react'
 import { MapPin } from 'lucide-react';
+import { useContext } from 'react';
+import WeatherContext from '../context/weather.context';
+
 
 const Place = () => {
+  const {place} = useContext(WeatherContext)  
   return (
     <div className='flex gap-0.5 items-center'>
       <MapPin/>
-      <p>London</p>, United Kingdom
+      <p>{place.name}</p>, {place.country}
     </div>
   )
 }
