@@ -5,30 +5,66 @@ import WeatherIcone from './WeatherIcone';
 
 const HourlyForcastWidget = ({data}:any) => {
     
-    const { time, temperature, date, icon, summary, wind, precipitation } = data;
+    const {temperature, date, icon, summary, wind, precipitation } = data;
     console.log(data)
+
+    // Format the time to a readable format
+    const now_date = {
+        day: new Intl.DateTimeFormat(navigator.language, { 
+            weekday: 'short', 
+            month: "2-digit",
+            day: "2-digit",
+        }).format(new Date()),
+         time: new Intl.DateTimeFormat(navigator.language, { 
+            hour: '2-digit', 
+            minute: "2-digit",
+        }).format(new Date().setMinutes(0)),
+    }
+
+    const weather_date = {
+        day: new Intl.DateTimeFormat(navigator.language, { 
+            weekday: 'short', 
+            month: "2-digit",
+            day: "2-digit",
+        }).format(new Date(date)),
+         time: new Intl.DateTimeFormat(navigator.language, { 
+            hour: '2-digit', 
+            minute: "2-digit",
+        }).format(new Date(date).setMinutes(0)),
+    }
+
+    console.log(now_date, weather_date)
+
     return (
-        <div className='widget'>
-            <div className='day'>{date}</div>
-            <div className='time'>{time}</div>
-            <div className='icon-tem'>
-                <div className='icon'>
-                    <WeatherIcone iconNumber={icon} alt={summary}/>
-                </div>
-                <div className='temperature'>
-                    {Math.round(temperature)} °C
-                </div>
+        <div className='container widget flex flex-col items-center justify-between bg-white border rounded-lg shadow-md hover:shadow-lg transition-shadow duration-300 ease-in-out'>
+            <div className='widget container border py-4 px-6 m-4 w-[200px] space-y-3'>
+            <div className='day text-center font-bold'>{weather_date.day}</div>
+            <div className='time text-center'>{weather_date.time}</div>
+
+            <div className='icon-tem flex items-center justify-between'>
+              <div className='icon'>
+                <WeatherIcone iconNumber={icon} alt={summary}/>
+              </div>
+              <div className='temperature text-xl font-semibold'>
+                {Math.round(temperature)} °C
+              </div>
             </div>
-            <div className='precipitation'>
-                {Math.round(precipitation.total)} mm/h
+
+            <div className='precipitation text-sm text-gray-600 text-center'>
+              {Math.round(precipitation.total)} mm/h
             </div>
-            <div className='wind'>
-                <div className='speed'>{Math.round(wind.speed)} km/h</div>
-                <div className='dir '>
-                    <Send className='transform rotate-[-45deg]'/>
-                </div>
+
+            <div className='wind flex items-center justify-between'>
+              <div className='speed'>{Math.round(wind.speed)} km/h</div>
+              <div className='dir'>
+                <Send 
+                style={{ rotate: `${-45 + wind.angle}deg` }}
+                className=""/>
+              </div>
             </div>
         </div>
+        </div>
+        
   )
 }
 
