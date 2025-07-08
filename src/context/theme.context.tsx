@@ -9,17 +9,17 @@ function ThemeProvider({ children }: { children: React.ReactNode }) {
 
 
   const saveThemeToLocalStorage = (theme:any) => {
-    localStorage.setItem(THEME_KEY, JSON.stringify(true));
+    localStorage.setItem(THEME_KEY, JSON.stringify(theme));
   };
 
   useEffect(() => {
-  const themeString = localStorage.getItem(THEME_KEY);
-
-  if (themeString === 'dark') {
-  setDark(true);
-} else if (themeString === 'light') {
-  setDark(false);
-}
+    const storedTheme = localStorage.getItem(THEME_KEY);
+    const savedTheme = storedTheme !== null ? JSON.parse(storedTheme) : null;
+    console.log(savedTheme)
+    if (savedTheme !== null) {
+      setDark(savedTheme);
+      return;
+    }
 
   const isSystemThemeDark = window.matchMedia(
     '(prefers-color-scheme: dark)'

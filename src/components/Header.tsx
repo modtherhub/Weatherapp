@@ -15,7 +15,6 @@ const Header = () => {
       <Place/>
       <SearchC/>
       <Setting/>
-      <button onClick={() => setDark(!dark)}>Toggle Theme</button>
     </div>
   )
 }
