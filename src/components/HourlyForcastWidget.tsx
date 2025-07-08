@@ -6,7 +6,6 @@ import WeatherIcone from './WeatherIcone';
 const HourlyForcastWidget = ({data}:any) => {
     
     const {temperature, date, icon, summary, wind, precipitation } = data;
-    console.log(data)
 
     // Format the time to a readable format
     const now_date = {
