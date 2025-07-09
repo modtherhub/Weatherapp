@@ -4,10 +4,6 @@ import { getWeatherData } from "/home/moibhub/Projects/weatherapp/src/components
 
 
 const WeatherContext = createContext<any>(null);
-type  tycw = {
-    current: any;
-    units: keyof typeof UNITS;
-} | undefined
 
 function WeatherProvider ({children}: { children: React.ReactNode }){
     const [place, setPlace] = useState(DEFAULT_PLACE);

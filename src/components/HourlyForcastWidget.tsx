@@ -1,10 +1,12 @@
 
 import { Send } from 'lucide-react';
 import WeatherIcone from './WeatherIcone';
+import { useContext } from 'react';
+import WeatherContext from '../context/weather.context';
 
 
 const HourlyForcastWidget = ({data}:any) => {
-    
+    const {units} = useContext(WeatherContext)
     const {temperature, date, icon, summary, wind, precipitation } = data;
 
 
@@ -42,7 +44,10 @@ const HourlyForcastWidget = ({data}:any) => {
         ;
 
     return (
-        <div className='container widget flex flex-col items-center justify-between bg-white rounded-lg shadow-md hover:shadow-lg transition-shadow duration-300 ease-in-out'>
+        <div className='container widget 
+        flex flex-col items-center justify-between 
+        bg-white rounded-lg shadow-md hover:shadow-lg 
+        transition-shadow duration-300 ease-in-out'>
             <div className='widget container border py-4 px-6 m-4 w-[200px] space-y-3'>
             <div className='day text-center font-bold'>{weather_date.day}</div>
             <div className='time text-center'>{weather_date.time}</div>
@@ -52,16 +57,16 @@ const HourlyForcastWidget = ({data}:any) => {
                 <WeatherIcone iconNumber={icon} alt={summary}/>
               </div>
               <div className='temperature text-xl font-semibold'>
-                {Math.round(temperature)} °C
+                {Math.round(temperature)} {units.temperature}
               </div>
             </div>
 
             <div className='precipitation text-sm text-gray-600 text-center'>
-              {Math.round(precipitation.total)} mm/h
+              {Math.round(precipitation.total)} {units.precipitation}
             </div>
 
             <div className='wind flex items-center justify-between'>
-              <div className='speed'>{Math.round(wind.speed)} km/h</div>
+              <div className='speed'>{Math.round(wind.speed)} {units.wind_speed}</div>
               <div className='dir'>
                 <Send 
                 style={{ rotate: `${-45 + wind.angle}deg` }}
