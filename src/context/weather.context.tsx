@@ -61,7 +61,7 @@ function WeatherProvider ({children}: { children: React.ReactNode }){
   
     return (
     <WeatherContext.Provider value={{
-         place,
+        place,
         setPlace,
         loading,
         currentWeather,

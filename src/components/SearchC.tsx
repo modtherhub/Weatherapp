@@ -1,10 +1,35 @@
 import { Search } from 'lucide-react';
 import { searchPlaces } from './api';
 import { useState } from 'react';
+import WeatherContext from '../context/weather.context';
+import { useContext } from 'react';
+
+type Place = {
+  place_id: string | number;
+  name: string;
+  adm_area1: string;
+  country: string;
+};
 
 const SearchC = () => {
+  const { setPlace } = useContext(WeatherContext);
   const [text, setText] = useState('');
-  const on
+  const [searchResults, setSearchResults] = useState<Place[]>([]);
+  const [openSearchResults, setOpenSearchResults] = useState(false);
+
+  async function onSearch(e:any) {
+    setText(e.target.value);
+    const data = await searchPlaces(e.target.value);
+    setSearchResults(data);
+    setOpenSearchResults(data.length);
+  }
+
+  const changePlace = (place:any) => {
+    setPlace(place);
+    setText('');
+    setOpenSearchResults(false);
+  };
+
   return (
     <>
     <div className='Search container relative flex justify-center items-center max-h-6 max-w-[200px] rounded-full border border-amber-600  py-3 '>
@@ -20,13 +45,21 @@ const SearchC = () => {
         value={text} 
         onChange={onSearch}/>
       </div>
+      {openSearchResults &&
       <div className='search-result absolute top-9 bg-amber-400 '>
         <div className='result-container'>
-          {
-            <div>Test</div>
-          }
+          {searchResults.map((place) => (
+                <div
+                  className='result'
+                  key={place.place_id}
+                  onClick={() => changePlace(place)}
+                >
+                  {place.name}, {place.adm_area1}, {place.country}
+                </div>
+              ))}
         </div>
       </div>
+      }
     </div>
     </>
   )
