@@ -1,8 +1,9 @@
 import { useContext } from "react";
 import WeatherIcone from "./WeatherIcone";
+import WeatherContext from "../context/weather.context";
 
 const DailyForcastWidget = ({data}: any) => {
-    const {} = useContext
+    const {units} = useContext(WeatherContext)
     const { 
         day,
         temperature_min,
@@ -43,13 +44,13 @@ const DailyForcastWidget = ({data}: any) => {
               </div>
               <div className='temperature text-xl font-semibold'>
                 
-                <div className="max">{Math.round(temperature_max)} °C</div>
-                <div className="min">{Math.round(temperature_min)} °C</div>
+                <div className="max">{Math.round(temperature_max)} {units.temperature}</div>
+                <div className="min">{Math.round(temperature_min)} {units.temperature}</div>
               </div>
             </div>
 
             <div className='precipitation text-sm text-gray-600 text-center'>
-              <div>{Math.round(precipitation.total)} mm/h</div>
+              <div>{Math.round(precipitation.total)} {units.precipitation}</div>
               <div>{precipitation.type}</div>
             </div>
             
