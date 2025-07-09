@@ -1,6 +1,8 @@
+import { useContext } from "react";
 import WeatherIcone from "./WeatherIcone";
 
 const DailyForcastWidget = ({data}: any) => {
+    const {} = useContext
     const { 
         day,
         temperature_min,

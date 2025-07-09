@@ -10,7 +10,7 @@ const Header = () => {
   
   return (
     <div className={
-  `${dark ? 'bg-black text-white' : 'bg-white text-black'} flex items-center justify-around px-6 py-4 bg-neutral-400`
+  `${dark ? 'bg-black text-white' : 'bg-white text-black'} flex items-center justify-around px-1 py-4 bg-neutral-400`
 }>
       <Place/>
       <SearchC/>

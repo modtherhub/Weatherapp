@@ -1,6 +1,8 @@
 import { Cloudy, Droplet, Droplets, Eye, GlassesIcon, Wind } from 'lucide-react';
 
 import WeatherIcone from './WeatherIcone';
+import { useContext } from 'react';
+import WeatherContext from '../context/weather.context';
 
 const CurrentWeather = ({data}:any) => {
   
@@ -16,6 +18,8 @@ const CurrentWeather = ({data}:any) => {
         wind,
         humidity,
     } = data;
+
+    const {units} = useContext(WeatherContext) 
 
     // Define units manually since data.units does not exist
     /* const units = {
@@ -33,42 +37,42 @@ const CurrentWeather = ({data}:any) => {
       icon: <Droplet/>,
       name: 'Precipitation',
       value: Math.round(precipitation.total),
-      unit: 'in/h',
+      unit: units.precipitation,
     },
     {
       id: 1,
       icon: <Wind/>,
       name: 'Wind',
       value: Math.round(wind.speed),
-      unit: 'mph',
+      unit: units.wind_speed,
     },
     {
       id: 2,
       icon: <Droplets/>,
       name: 'Humidity',
       value: Math.round(humidity),
-      unit: '%',
+      unit: units.humidity,
     },
     {
       id: 3,
       icon: <GlassesIcon/>,
       name: 'UV index',
       value: Math.round(uv_index),
-      unit: '',
+      unit: units.uv_index,
     },
     {
       id: 4,
       icon: <Cloudy/>,
       name: 'Clouds cover',
       value: Math.round(cloud_cover),
-      unit: '%',
+      unit: units.cloud_cover,
     },
     {
       id: 5,
       icon: <Eye/>,
       name: 'Visibility',
       value: Math.round(visibility),
-      unit: 'mi',
+      unit: units.visibility,
     },
   ];
     
@@ -80,11 +84,12 @@ const CurrentWeather = ({data}:any) => {
               <WeatherIcone iconNumber={icon_num} alt={summary}/>
             </div>
             <div className='value '>
-                <div className='real text-2xl'>{temperature} C</div>
-                <div className='feels_likes text-xs'>Feels like {feels_like} C</div>
+                <div className='real text-2xl'>{temperature} {units.temperature}</div>
+                <div className='feels_likes text-xs'>Feels like {feels_like} {units.temperature}</div>
             </div>
             <div className='summary'>{summary}</div>
         </div>
+
         <div className='other-infos border rounded-2xl   grid grid-cols-3 text-sm'>
             {otherInfoWidgets.map(({id, name, value, icon, unit})=> 
             <div className='Widget text-center px-7 py-5 ' key={id}>
@@ -93,7 +98,7 @@ const CurrentWeather = ({data}:any) => {
                         <div className='icone'>
                             {icon}
                         </div>
-                        <div className='Value text-center'>{value}{unit}</div>
+                        <div className='Value text-center'>{value} {unit}</div>
                     </div>
                     <div className='name text-center'>{name}</div>
                 </div>
